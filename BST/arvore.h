@@ -34,8 +34,4 @@ int altura(tipo_apontador p);
 //void arquivo(tipo_arquivo  *arq );  
 void antecessor(tipo_apontador q , tipo_apontador *r);  
 void retira(tipo_registro x , tipo_apontador *p); 
-void centro(tipo_apontador p);  
-void pesquisa(tipo_apontador *p);   
-// a propria funcao retorna o no retirado 
-//tipo_apontador *retira(tipo_bst *bst , tipo_apontador apontador);  
-// void retira(tipo_bst *bst , tipo_chave chave_buscada);
+  

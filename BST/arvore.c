@@ -56,21 +56,21 @@ void pesquisa_no(tipo_registro *registro_buscado  , tipo_apontador *p ){
 void imprime_dados_ordem(tipo_apontador p){ 
     if(p == NULL) return ;   
       
-    centro(p->esquerda); 
+    imprime_dados_ordem(p->esquerda); 
     printf("%d",p->registro.chave); 
-    centro(p->direita);
+    imprime_dados_ordem(p->direita);
 }  
 void imprime_dados_pre_ordem(tipo_apontador p){ 
     if(p == NULL) return ;  
     printf("%d",p->registro.chave);
-    centro(p->esquerda); 
-    centro(p->direita);  
+    imprime_dados_pre_ordem(p->esquerda); 
+    imprime_dados_pre_ordem(p->direita);  
 } 
 
 void imprime_dados_pos_ordem(tipo_apontador p){ 
     if(p == NULL) return ;  
-    centro(p->direita); 
-    centro(p->esquerda); 
+    imprime_dados_pos_ordem(p->direita); 
+    imprime_dados_pos_ordem(p->esquerda); 
     printf("%d",p->registro.chave);
      
      
