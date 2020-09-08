@@ -7,7 +7,8 @@
     int ans_sec = 0 ;  
     int chave_busc = 0  ; 
     int chave_aux = 0 ;  
-    tipo_dicionario dicionario;   
+    bst dicionario;   
+    // um dicionario é do tipo bst   
     inicializa_bst(&dicionario);   
     scanf("%d",&chave_aux); 
     x.chave = chave_aux ;   
@@ -19,6 +20,7 @@
         chave_aux = 0  ;    
 
      }   
+    /*  
     printf("Fim\n"); 
     //pesquisa(&dicionario);  
     printf("Escolha a opcao :\n 1- Buscar \n 2 - Retirar \n 3 - Imprimir\n"); 
@@ -46,18 +48,19 @@
         scanf("%d",&ans_sec);  
         switch(ans_sec){
             case 1 :  
-                imprime_dados_ordem(dicionario); 
+                imprime_dados_ordem(&dicionario); 
                 break ;  
             case 2 :  
-                imprime_dados_pre_ordem(dicionario); 
+                imprime_dados_pre_ordem(&dicionario); 
                 break ; 
-            case 3 :  
-                imprime_dados_pos_ordem(dicionario);   
+            case 3 :   
+            
+                imprime_dados_pos_ordem(&dicionario);   
                 break ;   
         }
 
     } 
-
+*/
      /* 
      insere_no(tipo_registro novo_no, tipo_apontador &no );  
      pesquisa(tipo_registro *registro_buscado  , tipo_apontador *p);  

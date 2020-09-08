@@ -1,7 +1,7 @@
 #include "arvore.h"   
-void inicializa_bst(tipo_dicionario *novo_dicionario){ 
+void inicializa_bst(bst *novo_dicionario){ 
     // por que ponteiro aqui ? 
-    *novo_dicionario  = NULL ;     
+    *novo_dicionario = NULL ;     
     printf("Dicionario criado\n");
 
 } 
@@ -9,7 +9,9 @@ void inicializa_bst(tipo_dicionario *novo_dicionario){
 void insere_no(tipo_registro  novo_no, tipo_apontador *no){ 
     // caso o registro sejá a raiz  
     // ou seja , o primeiro registro a ser inserido na arvore 
-    if( *no == NULL){   
+    if(*no == NULL){   
+        // aloca um espaco no buffer para um no  
+        // tipo_apontador :  *tipo_no  
         *no = (tipo_apontador)malloc(sizeof(tipo_no));  
 
         (*no)->registro = novo_no ;  
