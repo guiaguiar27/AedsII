@@ -63,5 +63,5 @@ void bst_antecedent(pointer q , bst *tree);
  *  \param node_content the node file that will be take out  
  *  \param tree The already built tree
  **/
-pointer *bst_node_disconnect(node_file node_content , bst *tree); 
+void *bst_node_disconnect(node_file node_content , bst *tree); 
   

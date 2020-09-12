@@ -94,16 +94,28 @@ void bst_antecedent(pointer q , bst *tree){
     *tree = (*tree)->left; 
     free(q);  
 }
-pointer  *bst_node_disconnect(node_file x , tree *p){ 
-    pointer  *removed_node = (pointer)malloc(sizeof(node));
-    *removed_node =  pesquisa_no(&x,&p); 
-    if (removed_node == NULL){ 
-        printf("The node doesn't on the tree!");
-    }  
-    else { 
-        
+void  *bst_node_disconnect(node_file x, bst *p){ 
+    pointer node_aux ;  
+    if(*p == NULL) printf(" The tree is void");
+    if(x.key < (*p)->node_register.key){ 
+        bst_node_insert(x, &(*p)->left); 
+        return ; 
+    }
+    if(x.key > (*p)->node_register.key){ 
+        bst_node_insert(x, &(*p)->right);
+        return ;  
     } 
-
-    //printf("%d",(*no_retirar)->registro.chave);  
+    if((*p)->right == NULL){ 
+        node_aux = *p ; 
+        *p = (*p)->left ; 
+        free(node_aux); 
+    }  
+    if((*p)->left != NULL){ 
+        bst_antecedent(*p,&(*p)->left);  
+        return;  
+    } 
+    node_aux = *p ; 
+    *p = (*p)->right; 
+    free(node_aux);     
 
 } 

@@ -1,5 +1,6 @@
 #include "arvore.c"
  int main(){  
+    
     node_file x ;   
     int answer = 0 ;   
     int answer_sec = 0 ;  
@@ -34,7 +35,7 @@
         printf("Key to be removed: \n"); 
         scanf("%d",&searched_key); 
         x.key = searched_key ;  
-        retira(x,&tree); 
+        bst_node_disconnect(x,&tree); 
     } 
      else if(answer == 3){ 
         printf("INPUT:\n1 Order\n2 Pre order\n3 post order\n "); 
@@ -50,8 +51,6 @@
                 bst_print_Postorder(tree);   
                 break ;   
         }
-
     }   
- 
     return 0 ;      
- }
+}
