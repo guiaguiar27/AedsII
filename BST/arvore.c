@@ -1,137 +1,109 @@
 #include "arvore.h"   
-void inicializa_bst(bst *novo_dicionario){ 
-    // por que ponteiro aqui ? 
-    *novo_dicionario = NULL ;     
-    printf("Dicionario criado\n");
-
+bst *bst_initialize(){ 
+    
+    bst *new_tree = NULL ;     
+    printf("The tree was be initialized.\n"); 
+    return new_tree; 
 } 
-// modulo de insercao  
-void insere_no(tipo_registro  novo_no, tipo_apontador *no){ 
-    // caso o registro sejá a raiz  
-    // ou seja , o primeiro registro a ser inserido na arvore 
-    if(*no == NULL){   
-        // aloca um espaco no buffer para um no  
-        // tipo_apontador :  *tipo_no  
-        *no = (tipo_apontador)malloc(sizeof(tipo_no));  
-
-        (*no)->registro = novo_no ;  
-        // como é uma nova folha os ponteiros direita e esquerda não apontam para nada 
-        (*no)->direita = NULL ; 
-        (*no)->esquerda = NULL ; 
-        printf("Inserido \n"); 
+void bst_node_insert(node_file  new_node , bst *tree){  
+    if(*tree == NULL){   
+        //aloca um buffer de memória para a árvore
+        *tree = (pointer)malloc(sizeof(node));  
+        (*tree)->node_register = new_node ;  
+        (*tree)->right = NULL ; 
+        (*tree)->left = NULL ; 
+        printf("The node was be inserted!\n"); 
         return ;     
     }  
-
-    if(novo_no.chave > (*no)->registro.chave ) {  
-        insere_no(novo_no , &(*no)->direita); 
-        printf("Inserido \n");  
+    if(new_node.key > (*tree)->node_register.key ) {  
+        insere_no(new_node , &(*tree)->right); 
+        printf("The node was be inserted on the right side of the tree!\n");  
         return ;  
     } 
-    else if(novo_no.chave <  (*no)->registro.chave){ 
-        insere_no(novo_no, &(*no)->esquerda); 
-        printf("Inserido \n");   
+    if(new_node.key <= (*tree)->node_register.key ) {  
+        insere_no(new_node , &(*tree)->left); 
+        printf("The node was be inserted on the left side of the tree!\n");  
         return ;  
     }
 }   
-// modulo para pesquisar um registro a partir da chave desse registro na bst  
-void pesquisa_no(tipo_registro *registro_buscado  , tipo_apontador *p ){ 
-    if(*p == NULL){  
-        printf("Arvore vazia\n");
-        return ;  
-    if((*registro_buscado).chave < (*p)->registro.chave ){        
-            printf(" Pesquisa a esquerda\n"); 
-            printf("Registro ainda não encontrado\n....\n"); 
-            pesquisa_no(registro_buscado,&(*p)->esquerda); 
-            return ; } 
-    if((*registro_buscado).chave > (*p)->registro.chave ){          
-            printf(" Pesquisa a esquerda\n");   
-            printf("Registro ainda não encontrado\n....\n");  
-            pesquisa_no(registro_buscado,&(*p)->direita); 
-            return ; }  
-         else {   
-             *registro_buscado = (*p)->registro; 
-             printf("Registro encontrado\n");
-         }
-    
+ 
+node_file  *bst_explore(node_file *searched_register ,bst  *tree){ 
+    if(*tree == NULL){  
+        printf("the tree is void\n");
+        return ;   
+    }
+    else if((*searched_register).key < (*tree)->node_register.key ){        
+            printf("Searching on the left side of the tree\n"); 
+            pesquisa_no(searched_register,&(*tree)->left); 
+            return ;  
+    } 
+    else if((*searched_register).key > (*tree)->node_register.key ){        
+            printf("Searching on the right side of the tree\n"); 
+            pesquisa_no(searched_register,&(*tree)->right); 
+            return ;  
+    }
+    else {   
+        *searched_register = (*tree)->node_register; 
+        printf("Register was finded\n"); 
+        return searched_register;  
+    }
 }  
-} 
-void imprime_dados_ordem(tipo_apontador p){ 
-    if(p == NULL) return ;   
-      
-    imprime_dados_ordem(p->esquerda); 
-    printf("%d",p->registro.chave); 
-    imprime_dados_ordem(p->direita);
-}  
-void imprime_dados_pre_ordem(tipo_apontador p){ 
-    if(p == NULL) return ;  
-    printf("%d",p->registro.chave);
-    imprime_dados_pre_ordem(p->esquerda); 
-    imprime_dados_pre_ordem(p->direita);  
-} 
 
-void imprime_dados_pos_ordem(tipo_apontador p){ 
-    if(p == NULL) return ;  
-    imprime_dados_pos_ordem(p->direita); 
-    imprime_dados_pos_ordem(p->esquerda); 
-    printf("%d",p->registro.chave);
+void bst_print_Inorder(bst tree){ 
+    if(tree == NULL) return ;   
+    
+    bst_print_Inorder(tree->left);   
+    printf("%d",tree->node_register.key); 
+    bst_print_Inorder(tree->right);
+}  
+void bst_print_Preorder(bst tree){ 
+    if(tree == NULL) return ;  
+
+    printf("%d",tree->node_register.key);
+    bst_print_Preorder(tree->left); 
+    bst_print_Preorder(tree->right);  
+} 
+void bst_print_Postorder(bst tree){ 
+    if(tree == NULL) return ;  
+    bst_print_Postorder(tree->right);  
+    bst_print_Preorder(tree->right);
+    printf("%d",tree->node_register.key);
      
      
-}   
-// calculo da altura da arvore  
-int altura(tipo_apontador p){ 
-    if (p == NULL){  
+}  
+int bst_height(bst  tree){ 
+    if (tree == NULL){  
         return -1;  
     } 
     else { 
-        int he = altura(p->esquerda); 
-        int hd = altura(p->direita);  
-        if(he<hd){ 
-            return hd+1;  
+        int hL = bst_height(tree->left); 
+        int hR = bst_height(tree->right);
+        if(hL<hR){ 
+            return hR+1;  
         } 
-        else return he+1 ; 
+        else return hL+1 ; 
     }
 }   
-// calculo do antecessor para posteriormente ser usado na remoção de um item  
-void antecessor(tipo_apontador q , tipo_apontador *r){ 
-    if((*r)->direita != NULL){ 
-        antecessor(q,&(*r)->direita); 
+void bst_antecedent(pointer q , bst *tree){ 
+    if((*tree)->right != NULL){ 
+        bst_antecedent(q,&(*tree)->right); 
         return ;  
-        // chegou no antecessor
     } 
-    q->registro =(*r)->registro; 
-    q = *r;  
-    // reoganizar a arvore  
-    *r = (*r)->direita; 
-    free(q); 
-
-}   
-void retira(tipo_registro x , tipo_apontador *p){   
-    tipo_apontador aux ;  
-    if(*p == NULL){ 
-        printf(" No nao esta na arvore\n"); 
-        return ;  
+    q->node_register = (*tree)->node_register; 
+    q = *tree; 
+    *tree = (*tree)->left; 
+    free(q);  
+}
+pointer  *bst_node_disconnect(node_file x , tree *p){ 
+    pointer  *removed_node = (pointer)malloc(sizeof(node));
+    *removed_node =  pesquisa_no(&x,&p); 
+    if (removed_node == NULL){ 
+        printf("The node doesn't on the tree!");
     }  
-    if(x.chave < (*p)->registro.chave){  
-        retira(x,&(*p)->esquerda);      
-        return ; 
-    } 
-    if(x.chave > (*p)->registro.chave){  
-        retira(x,&(*p)->direita);      
-        return ; 
-    }  
-    if((*p)->direita == NULL){ 
-        aux = *p ; 
-        *p = (*p)->esquerda ;
-        return ;   
+    else { 
+        
     } 
 
-    if((*p)->esquerda != NULL){ 
-        antecessor(*p ,&(*p)->esquerda);
-        return ;   
-    } 
-
-    aux = *p;  
-    *p = (*p)->direita;   
-    free(aux); 
+    //printf("%d",(*no_retirar)->registro.chave);  
 
 } 

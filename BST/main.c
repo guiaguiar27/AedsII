@@ -1,69 +1,57 @@
 #include "arvore.c"
- int main(){
+ int main(){  
+    node_file x ;   
+    int answer = 0 ;   
+    int answer_sec = 0 ;  
+    int searched_key = 0  ; 
+    int key_aux = 0 ;  
+    bst tree;   
+    pointer *node_aux = (pointer)malloc(sizeof(node));
          
-    printf("inicio\n"); 
-    tipo_registro x ;   
-    int ans = 0 ;   
-    int ans_sec = 0 ;  
-    int chave_busc = 0  ; 
-    int chave_aux = 0 ;  
-    bst dicionario;   
-    // um dicionario é do tipo bst   
-    inicializa_bst(&dicionario);   
-    scanf("%d",&chave_aux); 
-    x.chave = chave_aux ;   
-    chave_aux = 0  ; 
-    while(x.chave > 0){ 
-        insere_no(x,&dicionario); 
-        scanf("%d",&chave_aux); 
-        x.chave = chave_aux ; 
-        chave_aux = 0  ;    
-
-     }   
-    /*  
-    printf("Fim\n"); 
-    //pesquisa(&dicionario);  
-    printf("Escolha a opcao :\n 1- Buscar \n 2 - Retirar \n 3 - Imprimir\n"); 
-    scanf("%d\n",&ans); 
-    if(ans == 1){ 
+    tree = bst_initialize();
+    scanf("%d",&key_aux); 
+    x.key = key_aux ;   
+    key_aux = 0  ; 
+    while(x.key> 0){ 
+        bst_node_insert(x,&tree);
+        scanf("%d",&key_aux); 
+        x.key = key_aux ; 
+        key_aux = 0  ;    
+     }     
+    printf("INPUT:\n1- To search  \n2 - To remove \n3 - To print\n"); 
+    scanf("%d\n",&answer); 
+    if(answer == 1){ 
+        searched_key = 0 ;  
+        printf("Key: \n"); 
+        scanf("%d",&searched_key);    
+        x.key = searched_key;  
+        *node_aux = bst_explore(&x,&tree); 
+        printf("Register was finded: %d",(*node_aux)->node_register.key);
+    } 
+    else if(answer == 2 ){ 
         
-        chave_busc = 0 ;  
-        printf("Digite o valor da chave que vc deseja retirar\n"); 
-        scanf("%d",&chave_busc);    
-        x.chave = chave_busc;  
-        pesquisa_no(&x,&dicionario);
-     } 
-    else if(ans == 2 ){ 
-        //retira
-        
-        chave_busc = 0 ;  
-        printf("Digite o valor da chave que vc deseja retirar\n"); 
-        scanf("%d",&chave_busc); 
-        x.chave = chave_busc ;  
-        retira(x,&dicionario); 
-    }  
-    else if(ans == 3){ 
-    
-        printf("Digite : \n1 Ordem\n2 Pre-ordem\n3 pos-ordem\n "); 
-        scanf("%d",&ans_sec);  
-        switch(ans_sec){
+        searched_key = 0 ;  
+        printf("Key to be removed: \n"); 
+        scanf("%d",&searched_key); 
+        x.key = searched_key ;  
+        retira(x,&tree); 
+    } 
+     else if(answer == 3){ 
+        printf("INPUT:\n1 Order\n2 Pre order\n3 post order\n "); 
+        scanf("%d",&answer_sec);  
+        switch(answer_sec){
             case 1 :  
-                imprime_dados_ordem(&dicionario); 
+                bst_print_Inorder(tree); 
                 break ;  
             case 2 :  
-                imprime_dados_pre_ordem(&dicionario); 
+                bst_print_Preorder(tree); 
                 break ; 
-            case 3 :   
-            
-                imprime_dados_pos_ordem(&dicionario);   
+            case 3 :    
+                bst_print_Postorder(tree);   
                 break ;   
         }
 
-    } 
-*/
-     /* 
-     insere_no(tipo_registro novo_no, tipo_apontador &no );  
-     pesquisa(tipo_registro *registro_buscado  , tipo_apontador *p);  
-     */ 
+    }   
+ 
     return 0 ;      
  }
