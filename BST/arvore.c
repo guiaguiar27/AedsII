@@ -16,36 +16,37 @@ void bst_node_insert(node_file  new_node , bst *tree){
         return ;     
     }  
     if(new_node.key > (*tree)->node_register.key ) {  
-        insere_no(new_node , &(*tree)->right); 
+        bst_node_insert(new_node , &(*tree)->right); 
         printf("The node was be inserted on the right side of the tree!\n");  
         return ;  
     } 
     if(new_node.key <= (*tree)->node_register.key ) {  
-        insere_no(new_node , &(*tree)->left); 
+        bst_node_insert(new_node , &(*tree)->left); 
         printf("The node was be inserted on the left side of the tree!\n");  
         return ;  
     }
 }   
  
-node_file  *bst_explore(node_file *searched_register ,bst  *tree){ 
+node_file  *bst_explore(node_file searched_register ,bst  *tree){ 
+    node_file *node_s = (node_file*)malloc(sizeof(node_file)) ;   
     if(*tree == NULL){  
         printf("the tree is void\n");
-        return ;   
+        return NULL ;   
     }
-    else if((*searched_register).key < (*tree)->node_register.key ){        
+    else if(searched_register.key < (*tree)->node_register.key ){        
             printf("Searching on the left side of the tree\n"); 
-            pesquisa_no(searched_register,&(*tree)->left); 
-            return ;  
+            bst_explore(searched_register,&(*tree)->left); 
+            return 0;  
     } 
-    else if((*searched_register).key > (*tree)->node_register.key ){        
+    else if(searched_register.key > (*tree)->node_register.key ){        
             printf("Searching on the right side of the tree\n"); 
-            pesquisa_no(searched_register,&(*tree)->right); 
-            return ;  
+            bst_explore(searched_register,&(*tree)->right); 
+            return  0 ;  
     }
     else {   
-        *searched_register = (*tree)->node_register; 
+        *node_s = (*tree)->node_register; 
         printf("Register was finded\n"); 
-        return searched_register;  
+        return node_s;  
     }
 }  
 
@@ -53,13 +54,13 @@ void bst_print_Inorder(bst tree){
     if(tree == NULL) return ;   
     
     bst_print_Inorder(tree->left);   
-    printf("%d",tree->node_register.key); 
+    printf("\n%d\n",tree->node_register.key); 
     bst_print_Inorder(tree->right);
 }  
 void bst_print_Preorder(bst tree){ 
     if(tree == NULL) return ;  
 
-    printf("%d",tree->node_register.key);
+    printf("\n%d\n",tree->node_register.key); 
     bst_print_Preorder(tree->left); 
     bst_print_Preorder(tree->right);  
 } 
@@ -67,7 +68,7 @@ void bst_print_Postorder(bst tree){
     if(tree == NULL) return ;  
     bst_print_Postorder(tree->right);  
     bst_print_Preorder(tree->right);
-    printf("%d",tree->node_register.key);
+    printf("\n%d\n",tree->node_register.key);
      
      
 }  
@@ -99,11 +100,11 @@ void  *bst_node_disconnect(node_file x, bst *p){
     if(*p == NULL) printf(" The tree is void");
     if(x.key < (*p)->node_register.key){ 
         bst_node_insert(x, &(*p)->left); 
-        return ; 
+        return 0 ; 
     }
     if(x.key > (*p)->node_register.key){ 
         bst_node_insert(x, &(*p)->right);
-        return ;  
+        return 0;  
     } 
     if((*p)->right == NULL){ 
         node_aux = *p ; 
@@ -112,7 +113,7 @@ void  *bst_node_disconnect(node_file x, bst *p){
     }  
     if((*p)->left != NULL){ 
         bst_antecedent(*p,&(*p)->left);  
-        return;  
+        return 0;  
     } 
     node_aux = *p ; 
     *p = (*p)->right; 

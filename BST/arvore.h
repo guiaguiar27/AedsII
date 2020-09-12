@@ -32,7 +32,7 @@ void bst_node_insert(node_file  new_node , bst *tree);
  *  \param  searched_register the node to be searched  
  *  \param tree The already built tree
  **/
-node_file  *bst_explore(node_file *searched_register ,bst  *tree);  
+node_file  *bst_explore(node_file searched_register ,bst  *tree);  
 /** 
  *  \brief prints the tree height 
  *  \param tree The already built tree
