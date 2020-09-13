@@ -1,40 +1,73 @@
 #include "alunos.h"  
 
-void inicializa_dc(tipo_apontador *p){ 
-    *p = NULL;  
+bst *bst_student_initialize(){ 
+    
+    bst *new_students_tree = NULL ;     
+    printf("The students tree was be initialized.\n"); 
+    return new_students_tree; 
 } 
-void insere(tipo_apontador *p , tipo_registro new_registro){ 
-    if(*p == NULL){     
-        *p = (tipo_apontador)malloc(sizeof(tipo_no)); 
-        (*p)->registro = new_registro;  
-        (*p)->direita = NULL; 
-        (*p)->esquerda = NULL; 
+void bst_student_node_insert(node_file  new_node , bst *students_tree){  
+    if(*students_tree == NULL){   
+        //aloca um buffer de memória para a árvore
+        *students_tree = (pointer)malloc(sizeof(node));  
+        (*students_tree)->node_register = new_node ;  
+        (*students_tree)->right = NULL ; 
+        (*students_tree)->left = NULL ; 
+        printf("The node was be inserted!\n"); 
+        (*students_tree)->count++;
+        return ;     
+    }  
+    if(new_node.score > (*students_tree)->node_register.score ) {  
+        bst_student_node_insert(new_node , &(*students_tree)->right); 
+        printf("The node was be inserted on the right side of the tree!\n");  
+        (*students_tree)->count++;
+        return ;  
     } 
-    else if((*p)->registro.media_notas >  new_registro.notas_acumulados) insere(new_registro,&(*p)->esquerda);
-    else if((*p)->registro.media_notas <  new_registro.notas_acumulados) insere(new_registro,&(*p)->esquerda);
-} 
-
-void le_arquivo(tipo_apontador *p){ 
-    FILE *arq ;  
-    tipo_registro generico ;  
+    if(new_node.score <= (*students_tree)->node_register.score ) {  
+        bst_student_node_insert(new_node , &(*students_tree)->left); 
+        printf("The node was be inserted on the left side of the tree!\n");  
+        (*students_tree)->count++;
+        return ;  
+    }
+}   
+void bst_student_reads_archieve(bst *students_tree){
+    FILE *arch ;  
+    node_file *node_file_aux = (node_file*)malloc(sizeof(node_file));  
     int count = 0 ;   
-    float notas_acumuladas; 
-    int num = 3 ;   
-    arq = fopen("alunos.txt","r");  
-    if(arq == NULL){
-        printf("Arquivo nao foi aberto com sucesso\n");
+    arch = fopen("alunos.txt","r");  
+    if(arch == NULL){
+        printf("The file was not opened\n");
         return ; 
     } 
-    else printf("Arquivo aberto\n ");    
-    // ler_linha por linha   do arquivo 
-     
-    while(!feof(arq)){    
-        if(fscanf(arq,"%s - %d - %f - %f - %f",generico.nome,&generico.matricula,&generico.notas[1],&generico.notas[2],&generico.notas[3]) == NULL) break ;
+    else printf("File was opened\n ");  
+    while(!feof(arch)){     
+        printf("read the first line\n");
         
-        fscanf(arq,"%s - %d - %f - %f - %f",generico.nome,&generico.matricula,&generico.notas[1],&generico.notas[2],&generico.notas[3]);  
-        for(int i = 0 ; i < num; i++) notas_acumuladas = notas_acumuladas + generico.notas[i]/3;  
+        if(fscanf(arch,"%s - %d - %s - %f", 
+        node_file_aux->name, 
+        &node_file_aux->registration_number, 
+        node_file_aux->group, 
+        &node_file_aux->score) == NULL) break ;
+        
+        fscanf(arch,"%s - %d - %s - %f", 
+        node_file_aux->name, 
+        &node_file_aux->registration_number, 
+        node_file_aux->group, 
+        &node_file_aux->score); 
 
+        bst_student_node_insert(*node_file_aux,&students_tree); 
+        
     }      
-
     return ; 
+} 
+void bst_student_descending_print(bst students_tree){ 
+     if(students_tree == NULL) return ;  
+    bst_student_descending_print(students_tree->right);
+    printf("Name: %s - Registration Number:  %d - Group: %s - Score: %f\n", 
+        students_tree->node_register.name, 
+        &students_tree->node_register.registration_number, 
+        students_tree->node_register.group, 
+        &students_tree->node_register.score);
+    bst_student_descending_print(students_tree->left); 
+     
 } 

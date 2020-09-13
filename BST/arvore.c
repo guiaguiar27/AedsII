@@ -66,7 +66,7 @@ void bst_print_Preorder(bst tree){
 } 
 void bst_print_Postorder(bst tree){ 
     if(tree == NULL) return ;  
-    bst_print_Postorder(tree->right);  
+    bst_print_Postorder(tree->left);  
     bst_print_Preorder(tree->right);
     printf("\n%d\n",tree->node_register.key);
      

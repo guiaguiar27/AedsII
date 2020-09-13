@@ -1,11 +1,10 @@
 #include "alunos.c" 
 int main(){ 
-    printf("Main, funcionando\n"); 
-    le_arquivo();  
-    /* teste do fragmenta 
-    char teste[bufferLength]; 
-    strcpy(teste,"teste-123-tico");
-    fragmenta(teste); 
-    */
+    bst *student_tree;  
+    student_tree = bst_student_initialize(); 
+    printf("ok\n"); 
+    bst_student_reads_archieve(student_tree);   
+    bst_student_descending_print(student_tree);
+    
     return 0;  
 }

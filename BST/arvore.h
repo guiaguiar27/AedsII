@@ -17,8 +17,7 @@ typedef pointer bst;
 /***** functions ******/
 
 /** 
- *  \brief initialize binary search tree  
- *   
+ *  \brief initialize binary search tree    
  **/    
 bst *bst_initialize();  
 /** 
