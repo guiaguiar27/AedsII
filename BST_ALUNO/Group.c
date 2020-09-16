@@ -28,7 +28,7 @@ void bst_group_node_insert(group_node_file new_group_node , bst_group *group_tre
 }   
  
 float bst_group_explore(bst_group  group_tree){ 
-    if(group_tree->right == NULL){ 
+    if(group_tree->right == NULL){  
         return group_tree->node_register.score;  
     }  
     bst_group_explore(group_tree->right);

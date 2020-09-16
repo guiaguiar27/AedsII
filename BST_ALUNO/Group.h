@@ -24,10 +24,10 @@ bst_group *bst_group_initialize();
  *  \param  new_node The node that will be inserted on the tree  
  *  \param  tree The already built tree
  **/
-void bst_group_node_insert( group_node_file  new_node , bst_group *tree);  
+void bst_group_node_insert(group_node_file new_group_node , bst_group *group_tree);  
 /** 
  *  \brief searches the wished node in the tree 
  *  \param  searched_register the node to be searched  
  *  \param tree The already built tree
  **/
-float bst_group_explore(bst_group  tree);  
+float bst_group_explore(bst_group  Group_tree);  

@@ -1,4 +1,4 @@
-#include "alunos.c" 
+#include "alunos.h" 
 int main(){ 
     bst student_tree; 
     int answer = 8 ; 
@@ -22,9 +22,10 @@ int main(){
         printf("The highest score is : %.3f\n",bst_student_highest_grade(student_tree));  
     if(answer == 5)
         printf("The lowest score is : %.3f\n",bst_student_lowest_grade(student_tree));  
+    if (answer == 6) 
+        printf("The highest score gorup is %f  points\n",bst_group_explore(&student_tree->set_groups->node_register.score));
     else if(answer == 0)  
         break;
-    
     }
     return 0;  
 }
