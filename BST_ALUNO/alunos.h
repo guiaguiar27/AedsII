@@ -1,12 +1,9 @@
 #include <stdio.h> 
 #include <stdlib.h> 
 #include <string.h>
-#define Q_group 5 
+#include "Group.h"
 /******DATA TYPES*******/
-typedef struct Group{
-    char name[10]; 
-    float Group_Total_score ;  
-}Group;
+
 typedef struct node_file { 
     char name[20]; 
     float  score;  
@@ -50,12 +47,7 @@ void bst_student_reads_archieve(bst *studets_tree);
  *  \param  student_tree The already built student tree
  **/ 
 void bst_student_descending_print(bst students_tree);  
-/** 
- *  \brief  Fills in a vector were each cells contains a  student group registred   
- *  \param  group pointer to a  group vector 
- *  \param  student_tree The already built student tree 
- **/  
-void bst_student_fills_groups(Group *group, bst students_tree);  
+
 /** 
  *  \brief  prints the highest score in the tree   
  *  \param  student_tree The already built student tree

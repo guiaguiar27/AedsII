@@ -85,7 +85,3 @@ float bst_student_lowest_grade(bst students_tree){
     }  
     bst_student_highest_grade(students_tree->left);
 }  
-
-//doesn't working
-void bst_student_fills_groups(Group *group, bst students_tree);  
-    
