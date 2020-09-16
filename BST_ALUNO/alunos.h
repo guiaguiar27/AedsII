@@ -7,7 +7,7 @@
 typedef struct node_file { 
     char name[20]; 
     float  score;  
-    Group group[Q_group]; 
+    group_node_file Group ; 
     int registration_number ;  
 }node_file; 
 
@@ -21,7 +21,8 @@ typedef struct node{
 
     node_file node_register; 
     pointer left, right ;  
-    quantity Quantity_students;     
+    quantity Quantity_students; 
+    bst_group set_groups ;      
 
 }node ; 
 

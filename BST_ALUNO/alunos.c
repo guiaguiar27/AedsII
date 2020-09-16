@@ -3,6 +3,7 @@
 bst *bst_student_initialize(){ 
     
     bst *new_students_tree = NULL ;    
+    bst_group Generic_group = *bst_group_initialize(); 
     printf("The students tree was be initialized.\n");
     return new_students_tree; 
 
@@ -41,7 +42,7 @@ void bst_student_reads_archieve(bst *students_tree){
         fscanf(arch,"%s - %d - %s - %f", 
         node_file_aux->name, 
         &node_file_aux->registration_number, 
-        node_file_aux->group->name, 
+        node_file_aux->Group.name, 
         &node_file_aux->score); 
         if(feof(arch)) break ;
         
@@ -67,7 +68,7 @@ void bst_student_descending_print(bst students_tree){
     printf("Name: %s - Registration Number:  %d - Group: %s - Score: %.2f\n", 
         students_tree->node_register.name, 
         students_tree->node_register.registration_number, 
-        students_tree->node_register.group, 
+        students_tree->node_register.Group.name, 
         students_tree->node_register.score);
     bst_student_descending_print(students_tree->left);  
      
