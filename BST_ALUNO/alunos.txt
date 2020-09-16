@@ -1,7 +1,7 @@
-Guilherme  - 3496 - group1 - 4.6     
+Guilherme - 3496 - group1 - 4.6  
 Joao  - 3836 - group2 - 9.2 
 Maria - 3494 - group3 - 9.0    
-Pedro - 3296 -  group4 - 5.2      
+Pedro - 3296 - group4 - 5.2      
 Caio - 3826 - group2 - 7.1 
 Harry - 3196 -  group4 - 5.1
 Homer - 3214 - group3 - 8.5
