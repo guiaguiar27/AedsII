@@ -17,12 +17,12 @@ node_register   *sbb_explore(node_register searched_register ,SBB *tree){
     }
     else if(searched_register.key < (*tree)->node_register.key ){        
             printf("Searching on the left side of the tree\n"); 
-            bst_explore(searched_register,&(*tree)->Left); 
+            sbb_explore(searched_register,&(*tree)->Left); 
             return 0;  
     } 
     else if(searched_register.key > (*tree)->node_register.key ){        
             printf("Searching on the right side of the tree\n"); 
-            bst_explore(searched_register,&(*tree)->Right); 
+            sbb_explore(searched_register,&(*tree)->Right); 
             return  0 ;  
     }
     else {   
@@ -33,6 +33,7 @@ node_register   *sbb_explore(node_register searched_register ,SBB *tree){
 }  
 /******************************************************************************************/  
 void  sbb_LL_transformation(pointer *Generic_pointer){  
+    printf("Left-Left transformation it is happening ! \n");
     pointer Aux_pointer; 
     //1<- 2 <- 3(G)      
     // Aux_pointer is the left node
@@ -48,7 +49,8 @@ void  sbb_LL_transformation(pointer *Generic_pointer){
     *Generic_pointer = Aux_pointer; 
 } 
 /******************************************************************************************/  
-void  sbb_LR_transformation(pointer *Generic_pointer){
+void  sbb_LR_transformation(pointer *Generic_pointer){ 
+    printf("Left-Right transformation it is happening ! \n");
     pointer Aux_pointer1 , Aux_pointer2; 
     // right pointer
     Aux_pointer1 = (*Generic_pointer)->Left;  
@@ -66,6 +68,7 @@ void  sbb_LR_transformation(pointer *Generic_pointer){
 } 
 /******************************************************************************************/  
 void  sbb_RR_transformation(pointer *Generic_pointer){  
+    printf("Right-Right transformation it is happening ! \n"); 
     pointer Aux_pointer;      
     // Aux_pointer is the Right node
     Aux_pointer = (*Generic_pointer)->Right;    
@@ -80,7 +83,8 @@ void  sbb_RR_transformation(pointer *Generic_pointer){
     *Generic_pointer = Aux_pointer; 
 }
 /******************************************************************************************/  
-void  sbb_RL_transformation(pointer *Generic_pointer){
+void  sbb_RL_transformation(pointer *Generic_pointer){ 
+    printf("Right-Left transformation it is happening ! \n");
     pointer Aux_pointer1 , Aux_pointer2; 
     // right pointer
     Aux_pointer1 = (*Generic_pointer)->Right;  
@@ -95,5 +99,65 @@ void  sbb_RL_transformation(pointer *Generic_pointer){
     (*Generic_pointer)->Right = Aux_pointer2;  
     // change the Generic_pointer (sink of the subtree)
     *Generic_pointer = Aux_pointer2 ; 
-}  
-/******************************************************************************************/
+}   
+/******************************************************************************************/ 
+void sbb_node_Internal_insert(node_register  new_node ,  SBB *tree , edges *edge_inclination , short *End){ 
+    if (*tree == NULL){ 
+        *tree = (pointer)malloc(sizeof(node)); 
+        *edge_inclination = horizontal ; 
+        (*tree)->Left = NULL ; 
+        (*tree)->Right = NULL ;  
+        (*tree)->node_register = new_node ;  
+        (*tree)->Bit_L = (*tree)->Bit_R = vertical ; 
+        *End = FALSE  ; return;     
+    } 
+    if(new_node.key < (*tree)->node_register.key){ 
+        // in this case the node will run in the left side 
+        sbb_node_Internal_insert(new_node,&(*tree)->Left,&(*tree)->Bit_L,End); 
+        if(*End) return ;   
+        if((*tree)->Bit_L == vertical) { 
+            *End = TRUE; 
+            return ;  
+        }   
+        if((*tree)->Left->Bit_L == horizontal){ 
+            sbb_LL_transformation(tree); 
+            *edge_inclination = horizontal; 
+            return ; 
+        } 
+        if((*tree)->Left->Bit_R == horizontal){ 
+            sbb_LR_transformation(tree);  
+            *edge_inclination = horizontal; 
+            return ; 
+        }
+    } 
+    if(new_node.key <= (*tree)->node_register.key){ 
+        printf("The not already exists in this tree!\n "); 
+        *End = TRUE;  
+    } 
+    else { 
+        // the node is bigger than the tree  
+        // run in the right side  
+        sbb_node_Internal_insert(new_node,&(*tree)->Right,&(*tree)->Bit_R,End); 
+        if(*End) return ;   
+        if((*tree)->Bit_R == vertical) { 
+            *End = TRUE; 
+            return ;  
+        }   
+        if((*tree)->Right->Bit_R == horizontal){ 
+            sbb_RR_transformation(tree); 
+            *edge_inclination = horizontal; 
+            return ; 
+        } 
+        if((*tree)->Right->Bit_L == horizontal){ 
+            sbb_RL_transformation(tree);  
+            *edge_inclination = horizontal; 
+            return ; 
+        }
+    } 
+
+}
+/******************************************************************************************/ 
+void sbb_node_insert(node_register  new_node , SBB *tree){  
+    short End ; edges edge_inclination;  
+    sbb_node_Internal_insert(new_node,tree,&edge_inclination,&End);      
+}   

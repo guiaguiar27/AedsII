@@ -1,7 +1,9 @@
 /*****************************************SYMMETRIC BINARY B-TREE*****************************************/
 
 #include <stdio.h> 
-#include <stdlib.h> 
+#include <stdlib.h>  
+#define TRUE 1  
+#define FALSE 0 
 /****************DATA TYPES **************************/
 typedef struct { 
     int key ;  
@@ -44,7 +46,21 @@ void  sbb_RR_transformation(pointer *Generic_pointer);
  * \brief Bayer transforamtion Right-Left 
  * \param Generic_pointer Pointer that will be transformed
  */
-void  sbb_RL_transformation(pointer *Generic_pointer);
+void  sbb_RL_transformation(pointer *Generic_pointer); 
+/** 
+ * \brief Inserts a new node to the tree  
+ * \param new_node The node register that will be inserted 
+ * \param tree the tree in construction 
+ */ 
+void sbb_node_insert(node_register  new_node , SBB *tree);  
+/** 
+ * \brief Auxiliar function to insert a new node to the tree  
+ * \param new_node The node register that will be inserted 
+ * \param tree the tree in construction 
+ * \param edge_inclination the inclination kind  
+ * \param End  flag to stop 
+ */ 
+void sbb_node_Internal_insert(node_register  new_node ,  SBB *tree , edges *edge_inclination , short *End);
 
 
 
