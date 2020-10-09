@@ -61,6 +61,13 @@ void sbb_node_insert(node_register  new_node , SBB *tree);
  * \param End  flag to stop 
  */ 
 void sbb_node_Internal_insert(node_register  new_node ,  SBB *tree , edges *edge_inclination , short *End);
-
-
-
+/** 
+ * \brief remove a chosen node  
+ * \param  x node that will be removed  
+ * \param  p tree
+ */
+void  sbb_node_disconnect(node_register x, SBB *tree) ; 
+void sbb_node_internal_disconnect(node_register x, SBB *tree, short *End);   
+void sbb_ShortLeft(pointer *p , short *End);   
+void sbb_ShorRight(pointer *p, short *End);  
+void sbb_antecedent(pointer q , SBB *tree, short *End);

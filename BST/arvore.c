@@ -95,7 +95,7 @@ void bst_antecedent(pointer q , bst *tree){
     *tree = (*tree)->left; 
     free(q);  
 }
-void  *bst_node_disconnect(node_file x, bst *p){ 
+void  bst_node_disconnect(node_file x, bst *p){ 
     pointer node_aux ;  
     if(*p == NULL) printf(" The tree is void");
     if(x.key < (*p)->node_register.key){ 

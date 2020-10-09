@@ -142,7 +142,8 @@ void sbb_node_Internal_insert(node_register  new_node ,  SBB *tree , edges *edge
         if((*tree)->Bit_R == vertical) { 
             *End = TRUE; 
             return ;  
-        }   
+        }    
+        
         if((*tree)->Right->Bit_R == horizontal){ 
             sbb_RR_transformation(tree); 
             *edge_inclination = horizontal; 
@@ -160,4 +161,68 @@ void sbb_node_Internal_insert(node_register  new_node ,  SBB *tree , edges *edge
 void sbb_node_insert(node_register  new_node , SBB *tree){  
     short End ; edges edge_inclination;  
     sbb_node_Internal_insert(new_node,tree,&edge_inclination,&End);      
-}   
+}  
+/******************************************************************************************/  
+void sbb_ShortLeft(pointer *p, short *End){ 
+
+}
+/******************************************************************************************/  
+void sbb_ShorRight(pointer *p, short *End){ 
+
+}  
+
+/******************************************************************************************/  
+void sbb_antecedent(pointer q , SBB *tree, short *End){ 
+
+}
+
+/******************************************************************************************/  
+void sbb_node_internal_disconnect(node_register x, SBB *tree, short *End){ 
+    pointer *AUX;  
+    if(*tree == NULL){ 
+        printf("The tree is void\n"); return; 
+    }  
+    if(x.key < (*tree)->node_register.key){ 
+        sbb_node_internal_disconnect(x,(*tree)->Left,&End); 
+        if(!End){ 
+            sbb_ShortLeft(tree,End);
+            return ;  
+        }
+    }
+    if(x.key < (*tree)->node_register.key){
+        sbb_node_internal_disconnect(x,(*tree)->Right,&End); 
+        if(!End){ 
+            sbb_ShortRight(tree,End);
+            return ;  
+        }
+    }    
+    // the node was been finded
+    *End = FALSE ; AUX = *tree;  
+    if((*AUX)->Right == NULL){ 
+        tree = (*AUX)->Left ; 
+        free(AUX);  
+        if(*tree != NULL){ 
+            *End = TRUE;   
+            return;  
+        }
+    } 
+    if((*AUX)->Left == NULL){ 
+        tree = (*AUX)->Right ; 
+        free(AUX);  
+        if(*tree != NULL){ 
+            *End = TRUE;   
+            return;  
+        }
+    }
+    sbb_antecedent(AUX,&(*tree)->Left,&End); 
+    // repair with sort left, beacause the antecedent are at the left side  
+    if(!*End){ 
+        sbb_ShortLeft(tree,End);  
+    }
+}
+/******************************************************************************************/ 
+void  sbb_node_disconnect(node_register x, SBB *p){
+    short *End; 
+    sbb_node_internal_disconnect(x,p,&End); 
+} 
+/******************************************************************************************/ 
