@@ -32,7 +32,7 @@ typedef struct Node_Type {
       Otherwise, it will be allocated to the left side */
       char Char_to_Compare; 
     }Internal_Node; 
-    
+    int measure_words; 
     Key_Word Generic_Word;
   
   }Node;
@@ -40,10 +40,12 @@ typedef struct Node_Type {
  
 typedef Pointer PATRICIA  ; 
 /** 
- *  \brief Verify if the node is an external node  
+ *  \brief Verify if the node is an internal node
+ *  \brief Verify if the node is an  external node
  *  \param Node The node that will be verified.   
  * 
- **/ 
+ **/  
+short PATRICIA_Internal_Node_Verify(Pointer Node);
 short PATRICIA_External_Node_Verify(Pointer Node); 
 /** 
  *  \brief Creates an internal node, this node contains index like the main information and is used to compare with other nodes
@@ -70,6 +72,6 @@ Pointer PATRICIA_Insert(Key_Word word, PATRICIA *tree);
 /** 
  *  
  **/  
-int PATRICIA_height(int height);
+void PATRICIA_Print_Alphabetical_Order(PATRICIA P);
 
 
