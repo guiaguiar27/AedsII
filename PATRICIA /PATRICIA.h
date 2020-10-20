@@ -7,6 +7,7 @@
 #include <stdio.h> 
 #include <string.h>
 #include <sys/time.h>
+#include "Stats.c"
 #define D 10    
 #define Size 50 
 typedef char Key_Word[Size];
@@ -23,7 +24,6 @@ typedef struct Node_Type *Pointer;
 typedef struct Node_Type {
   TypeNode Type;
   union {
-
     struct {
       IndexType Index;
       Pointer Left, Right;  
@@ -32,10 +32,10 @@ typedef struct Node_Type {
       Otherwise, it will be allocated to the left side */
       char Char_to_Compare; 
     }Internal_Node; 
-    int measure_words; 
+
     Key_Word Generic_Word;
   
-  }Node;
+  }Node;  
 }Node_Type; 
  
 typedef Pointer PATRICIA  ; 
@@ -56,7 +56,7 @@ Pointer PATRICIA_Create_Internal_Node(Pointer *Left, Pointer *Right, int index, 
 /** 
  *  \brief Create an external
  **/
-Pointer PATRICIA_Create_External_Node(Key_Word new_word, PATRICIA *P); 
+Pointer PATRICIA_Create_External_Node(Key_Word new_word, PATRICIA *P, PATRICIA_Stats *S); 
 /** 
  *  \brief This function is used to find a wished node 
  **/ 
@@ -64,11 +64,11 @@ void PATRICIA_Node_Search(Key_Word Searched_Word, PATRICIA *P);
 /** 
  *  \brief This function is an encapsulation of the PATRICIA Insert function, it is in this function that the entire decision, in relation to the type of node, that will be taken
  **/ 
-Pointer PATRICIA_Internal_Insert(Key_Word word, PATRICIA *P, short Index, char Distinct_char); 
+Pointer PATRICIA_Internal_Insert(Key_Word word, PATRICIA *P, short Index, char Distinct_char, PATRICIA_Stats *S); 
 /** 
  *  \brief The function of insertion, specifically the prime function, in this occurs the encapsulation of the internal function 
  **/   
-Pointer PATRICIA_Insert(Key_Word word, PATRICIA *tree);
+Pointer PATRICIA_Insert(Key_Word word, PATRICIA *tree, PATRICIA_Stats *S);
 /** 
  *  
  **/  
