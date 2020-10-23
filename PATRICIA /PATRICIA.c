@@ -50,7 +50,11 @@ void PATRICIA_Node_Search(Key_Word Searched_Word, PATRICIA P, PATRICIA_Stats *S)
         printf("This word was been finded!\n"); 
         return ; 
       } 
-    } 
+    }  
+    else { 
+      printf("The search was not succeeded... \n The word [%s] isn't in this tree",Searched_Word); 
+
+    }
     
     if(tam_word < P->Node.Internal_Node.Index){ 
       (*S).measure_comparisons_search +=1; 
