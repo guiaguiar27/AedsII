@@ -52,7 +52,7 @@ short PATRICIA_External_Node_Verify(Pointer Node);
  *  \param  Left  
  *  \param Right 
  **/
-Pointer PATRICIA_Create_Internal_Node(Pointer *Left, Pointer *Right, int index, char compare);    
+Pointer PATRICIA_Create_Internal_Node(Pointer *Left, Pointer *Right, int index, char compare, PATRICIA_Stats *S);    
 /** 
  *  \brief Create an external
  **/
@@ -60,7 +60,7 @@ Pointer PATRICIA_Create_External_Node(Key_Word new_word, PATRICIA *P, PATRICIA_S
 /** 
  *  \brief This function is used to find a wished node 
  **/ 
-void PATRICIA_Node_Search(Key_Word Searched_Word, PATRICIA *P); 
+void PATRICIA_Node_Search(Key_Word Searched_Word, PATRICIA P, PATRICIA_Stats *S); 
 /** 
  *  \brief This function is an encapsulation of the PATRICIA Insert function, it is in this function that the entire decision, in relation to the type of node, that will be taken
  **/ 

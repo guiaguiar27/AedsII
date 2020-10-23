@@ -16,6 +16,11 @@ int main(){
     }  
     printf("Words in this tree:\n");
     PATRICIA_Print_Alphabetical_Order(Patricia_Tree);
-    Stats_Print_Mount(S);
+    Stats_Print_Mount(S); 
+    Stats_Print_Memory_Consumption(S); 
+    printf("Word to search :\n"); 
+    scanf("%s",Word); 
+    PATRICIA_Node_Search(Word,Patricia_Tree,&S); 
+    Stats_Print_Comparisons(S);
     return 0; 
 }
